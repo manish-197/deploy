@@ -10,6 +10,7 @@ import {
   Radio
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function EmergencySOSBeacon({ onNavigateToHospital, activeVitals, currentUser, onRequireAuth }) {
   const { t } = useLanguage();
@@ -83,7 +84,7 @@ export default function EmergencySOSBeacon({ onNavigateToHospital, activeVitals,
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/sos/dispatch', {
+      const res = await fetch(`${API_BASE_URL}/api/sos/dispatch`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

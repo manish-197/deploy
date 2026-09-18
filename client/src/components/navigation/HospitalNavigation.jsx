@@ -15,6 +15,7 @@ import {
   LocateFixed
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function HospitalNavigation({ targetHospital, activePatient, onNavigateBackToTriage }) {
   const { lang, t } = useLanguage();
@@ -87,7 +88,7 @@ export default function HospitalNavigation({ targetHospital, activePatient, onNa
   const fetchNearestHospitals = async (lat, lng) => {
     setLoadingHospitals(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/hospitals/nearest?lat=${lat}&lng=${lng}&limit=4`);
+      const res = await fetch(`${API_BASE_URL}/api/hospitals/nearest?lat=${lat}&lng=${lng}&limit=4`);
       if (!res.ok) throw new Error('Failed to fetch hospitals');
       const data = await res.json();
       const fetched = data.hospitals || [];

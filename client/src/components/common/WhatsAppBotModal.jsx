@@ -13,6 +13,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function WhatsAppBotModal({ isOpen, onClose }) {
   const { lang, speechLang } = useLanguage();
@@ -56,7 +57,7 @@ export default function WhatsAppBotModal({ isOpen, onClose }) {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/whatsapp/simulate', {
+      const res = await fetch(`${API_BASE_URL}/api/whatsapp/simulate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: sentText, language: lang }),

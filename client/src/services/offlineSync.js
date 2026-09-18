@@ -93,7 +93,7 @@ export async function syncPendingQueue(onSyncSuccess) {
       for (const item of items) {
         try {
           if (item.memberId) {
-            await fetch(`http://localhost:5000/api/family/${item.memberId}/vitals`, {
+            await fetch(`${API_BASE_URL}/api/family/${item.memberId}/vitals`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(item),
