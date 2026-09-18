@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config/api';
 
 const AuthContext = createContext(null);
 
@@ -59,7 +60,7 @@ export function AuthProvider({ children }) {
 
         // Re-validate and re-fetch latest profile from server
         try {
-          const res = await fetch('http://localhost:5000/api/auth/me', {
+          const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
             headers: {
               'Authorization': `Bearer ${savedToken}`,
             },

@@ -1,4 +1,6 @@
 // IndexedDB Offline Queue Manager for ArogyaRakshak AI
+import { API_BASE_URL } from '../config/api';
+
 const DB_NAME = 'ArogyaRakshakOfflineDB';
 const DB_VERSION = 1;
 const STORE_VITALS = 'pending_vitals';
