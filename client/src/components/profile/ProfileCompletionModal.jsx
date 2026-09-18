@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { useAuth } from '../../auth/AuthContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function ProfileCompletionModal({ 
   isOpen, 
@@ -108,7 +109,7 @@ export default function ProfileCompletionModal({
       const emergencyPhone = formData.emergencyContactPhone.trim() || formData.phone.trim();
       const emergencyName = formData.emergencyContactName.trim() || 'Family Contact';
 
-      const res = await fetch('http://localhost:5000/api/auth/profile', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

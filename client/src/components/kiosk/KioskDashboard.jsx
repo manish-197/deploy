@@ -25,6 +25,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function KioskDashboard({ 
   currentUser, 
@@ -92,7 +93,7 @@ export default function KioskDashboard({
     const fetchBackendData = async () => {
       // 1. Fetch Prescriptions
       try {
-        const res = await fetch('http://localhost:5000/api/prescriptions');
+        const res = await fetch(`${API_BASE_URL}/api/prescriptions`);
         if (res.ok) {
           const data = await res.json();
           if (data.prescriptions && Array.isArray(data.prescriptions)) {
@@ -117,7 +118,7 @@ export default function KioskDashboard({
 
       // 2. Fetch Kiosk Patients from DB
       try {
-        const resPat = await fetch('http://localhost:5000/api/kiosk/patients');
+        const resPat = await fetch(`${API_BASE_URL}/api/kiosk/patients`);
         if (resPat.ok) {
           const patData = await resPat.json();
           if (patData.patients && Array.isArray(patData.patients)) {
@@ -146,7 +147,7 @@ export default function KioskDashboard({
 
       // 3. Fetch Emergency Doctor Appointments from DB
       try {
-        const resApp = await fetch('http://localhost:5000/api/appointments');
+        const resApp = await fetch(`${API_BASE_URL}/api/appointments`);
         if (resApp.ok) {
           const appData = await resApp.json();
           if (appData.appointments && Array.isArray(appData.appointments)) {
@@ -242,7 +243,7 @@ export default function KioskDashboard({
 
     // Attempt backend persistence to MongoDB
     try {
-      const res = await fetch('http://localhost:5000/api/kiosk/patients', {
+      const res = await fetch(`${API_BASE_URL}/api/kiosk/patients`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -321,7 +322,7 @@ export default function KioskDashboard({
     const pId = patient._id || patient.id;
     setDownloadingCardId(pId);
     try {
-      const res = await fetch('http://localhost:5000/api/health-card/pdf', {
+      const res = await fetch(`${API_BASE_URL}/api/health-card/pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1137,7 +1138,7 @@ export default function KioskDashboard({
                                   </div>
 
                                   <a
-                                    href={`http://localhost:5000/api/prescriptions/${rxId}/pdf`}
+                                    href={`${API_BASE_URL}/api/prescriptions/${rxId}/pdf`}
                                     target="_blank"
                                     rel="noreferrer"
                                     className="btn-medical-blue text-xs py-1.5 px-3 flex items-center justify-center gap-1.5 shadow-sm shrink-0 self-start sm:self-auto"
@@ -1325,7 +1326,7 @@ export default function KioskDashboard({
                         
                         {/* Download Official Prescription PDF */}
                         <a
-                          href={`http://localhost:5000/api/prescriptions/${prescId}/pdf`}
+                          href={`${API_BASE_URL}/api/prescriptions/${prescId}/pdf`}
                           target="_blank"
                           rel="noreferrer"
                           className="flex-1 btn-medical-blue text-xs py-2 px-3 flex items-center justify-center gap-1.5 shadow-md"

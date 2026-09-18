@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { useAuth } from '../../auth/AuthContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function FamilyHub({ 
   currentUser, 
@@ -144,7 +145,7 @@ export default function FamilyHub({
     if (!memberId) return;
     setLoadingPrescriptions(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/prescriptions/member/${memberId}`);
+      const res = await fetch(`${API_BASE_URL}/api/prescriptions/member/${memberId}`);
       if (!res.ok) throw new Error('Failed to fetch member prescriptions');
       const data = await res.json();
       setPrescriptions(data.prescriptions || []);
@@ -234,7 +235,7 @@ export default function FamilyHub({
     const fetchFamilyMembers = async () => {
       if (!token) return;
       try {
-        const res = await fetch('http://localhost:5000/api/family', {
+        const res = await fetch(`${API_BASE_URL}/api/family`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -276,7 +277,7 @@ export default function FamilyHub({
   const handleAddMember = async (newMemberData) => {
     if (token) {
       try {
-        const res = await fetch('http://localhost:5000/api/family', {
+        const res = await fetch(`${API_BASE_URL}/api/family`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -335,7 +336,7 @@ export default function FamilyHub({
 
     if (token && targetId && !targetId.toString().startsWith('mem_') && !targetId.toString().startsWith('self_') && memberToEdit.relation !== 'Self') {
       try {
-        await fetch(`http://localhost:5000/api/family/${targetId}`, {
+        await fetch(`${API_BASE_URL}/api/family/${targetId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -373,7 +374,7 @@ export default function FamilyHub({
     const targetId = memberToDelete._id || memberToDelete.id;
     if (token && targetId && !targetId.toString().startsWith('mem_')) {
       try {
-        await fetch(`http://localhost:5000/api/family/${targetId}`, {
+        await fetch(`${API_BASE_URL}/api/family/${targetId}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -610,7 +611,7 @@ export default function FamilyHub({
 
                       <div className="flex items-center gap-2">
                         <a
-                          href={`http://localhost:5000/api/prescriptions/${presc._id || presc.id}/pdf`}
+                          href={`${API_BASE_URL}/api/prescriptions/${presc._id || presc.id}/pdf`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="btn-medical-blue text-xs py-1.5 px-3.5 flex items-center gap-1.5 whitespace-nowrap shadow-sm"

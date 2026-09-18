@@ -23,6 +23,7 @@ import {
   Users
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 import { getSpeechLangCode } from '../../i18n/translations';
 
 function detectSimpleScriptLang(text) {
@@ -445,7 +446,7 @@ export default function VoiceTriage({ onNavigateToHospital, onNavigateToHub, act
         vitals: activeVitals
       });
 
-      const res = await fetch('http://localhost:5000/api/triage', {
+      const res = await fetch(`${API_BASE_URL}/api/triage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -586,7 +587,7 @@ export default function VoiceTriage({ onNavigateToHospital, onNavigateToHub, act
       const patientBlood = selectedMember?.bloodGroup || currentUser?.bloodGroup || 'B+';
       const patientAbha = selectedMember?.abhaId || currentUser?.abhaId || '14-2026-9812-4456';
 
-      const res = await fetch('http://localhost:5000/api/prescriptions/save', {
+      const res = await fetch(`${API_BASE_URL}/api/prescriptions/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1082,7 +1083,7 @@ export default function VoiceTriage({ onNavigateToHospital, onNavigateToHub, act
                   <div className="flex items-center gap-2.5">
                     <a
                       id="download-triage-pdf-btn"
-                      href={`http://localhost:5000/api/prescriptions/${savedPrescription._id || savedPrescription.id}/pdf`}
+                      href={`${API_BASE_URL}/api/prescriptions/${savedPrescription._id || savedPrescription.id}/pdf`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-medical-blue text-xs py-1.5 px-3 flex items-center gap-1.5"

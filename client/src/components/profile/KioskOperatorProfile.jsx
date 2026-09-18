@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { useAuth } from '../../auth/AuthContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function KioskOperatorProfile({ onNavigate, onLogout }) {
   const { lang, t } = useLanguage();
@@ -64,9 +65,9 @@ export default function KioskOperatorProfile({ onNavigate, onLogout }) {
     const fetchLiveCounts = async () => {
       try {
         const [patRes, rxRes, appRes] = await Promise.allSettled([
-          fetch('http://localhost:5000/api/kiosk/patients'),
-          fetch('http://localhost:5000/api/prescriptions'),
-          fetch('http://localhost:5000/api/appointments')
+          fetch(`${API_BASE_URL}/api/kiosk/patients`),
+          fetch(`${API_BASE_URL}/api/prescriptions`),
+          fetch(`${API_BASE_URL}/api/appointments`)
         ]);
 
         let pCount = 0;
@@ -129,7 +130,7 @@ export default function KioskOperatorProfile({ onNavigate, onLogout }) {
     setSaveError('');
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/profile', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -10,6 +10,7 @@ import {
   Phone
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function EditMemberModal({ isOpen, onClose, member, onMemberUpdated, onUpdateMember }) {
   const { t } = useLanguage();
@@ -72,7 +73,7 @@ export default function EditMemberModal({ isOpen, onClose, member, onMemberUpdat
 
       if (isSelf) {
         // Update user profile
-        const res = await fetch('http://localhost:5000/api/auth/profile', {
+        const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -109,7 +110,7 @@ export default function EditMemberModal({ isOpen, onClose, member, onMemberUpdat
 
       // Family member update
       const targetId = member._id || member.id;
-      const res = await fetch(`http://localhost:5000/api/family/${targetId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/family/${targetId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

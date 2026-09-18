@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import PrescriptionResultModal from './PrescriptionResultModal';
+import { API_BASE_URL } from '../../config/api';
 
 // Comprehensive 3-Tier Multilingual Symptom Catalog
 export const SYMPTOM_CATALOG = {
@@ -1904,7 +1905,7 @@ export default function SymptomChecklistTriage({
   useEffect(() => {
     const fetchDocs = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/hospitals/nearest?lat=18.5204&lng=73.8567&limit=3');
+        const res = await fetch(`${API_BASE_URL}/api/hospitals/nearest?lat=18.5204&lng=73.8567&limit=3`);
         if (res.ok) {
           const data = await res.json();
           if (data.hospitals && data.hospitals.length > 0) {
@@ -2034,7 +2035,7 @@ export default function SymptomChecklistTriage({
         : `2-Day Preliminary Assessment: ${selectedItems.map(i => i.name.en || i.name.mr).join(', ')}`;
 
       // Save to Backend API
-      const res = await fetch('http://localhost:5000/api/prescriptions/save', {
+      const res = await fetch(`${API_BASE_URL}/api/prescriptions/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2139,7 +2140,7 @@ export default function SymptomChecklistTriage({
       const patientBlood = selectedMember?.bloodGroup || 'B+';
       const patientAbha = selectedMember?.abhaId || '14-2026-9812-4456';
 
-      const res = await fetch('http://localhost:5000/api/triage/custom-symptom', {
+      const res = await fetch(`${API_BASE_URL}/api/triage/custom-symptom`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

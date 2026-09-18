@@ -24,6 +24,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 import { useAuth } from '../../auth/AuthContext';
 
 export default function ProfilePage({ onNavigateHome, onNavigate }) {
@@ -81,7 +82,7 @@ export default function ProfilePage({ onNavigateHome, onNavigate }) {
       // Fetch QR Code preview for digital health card
       const fetchQr = async () => {
         try {
-          const res = await fetch('http://localhost:5000/api/health-card/preview', {
+          const res = await fetch(`${API_BASE_URL}/api/health-card/preview`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -130,7 +131,7 @@ export default function ProfilePage({ onNavigateHome, onNavigate }) {
   const handleDownloadCard = async () => {
     setDownloadingCard(true);
     try {
-      const res = await fetch('http://localhost:5000/api/health-card/pdf', {
+      const res = await fetch(`${API_BASE_URL}/api/health-card/pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -206,7 +207,7 @@ export default function ProfilePage({ onNavigateHome, onNavigate }) {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/profile', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -17,6 +17,7 @@ import {
   Download
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function PrescriptionModal({ isOpen, onClose, member, onPrescriptionSaved }) {
   const { lang, speechLang, t } = useLanguage();
@@ -48,7 +49,7 @@ export default function PrescriptionModal({ isOpen, onClose, member, onPrescript
       formData.append('familyMemberId', member?.id || 'self');
       formData.append('language', lang);
 
-      const res = await fetch('http://localhost:5000/api/prescriptions/ocr', {
+      const res = await fetch(`${API_BASE_URL}/api/prescriptions/ocr`, {
         method: 'POST',
         body: formData,
       });
@@ -274,7 +275,7 @@ export default function PrescriptionModal({ isOpen, onClose, member, onPrescript
               <div className="flex items-center gap-2">
                 {ocrResult?.prescription && (
                   <a
-                    href={`http://localhost:5000/api/prescriptions/${ocrResult.prescription._id || ocrResult.prescription.id}/pdf`}
+                    href={`${API_BASE_URL}/api/prescriptions/${ocrResult.prescription._id || ocrResult.prescription.id}/pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-medical-blue text-xs py-2 px-3.5 flex items-center gap-1.5"

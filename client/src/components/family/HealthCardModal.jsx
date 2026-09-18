@@ -10,6 +10,7 @@ import {
   Heart
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function HealthCardModal({ isOpen, onClose, member }) {
   const { t } = useLanguage();
@@ -22,7 +23,7 @@ export default function HealthCardModal({ isOpen, onClose, member }) {
     // Fetch signed QR preview from server
     const fetchPreview = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/health-card/preview', {
+        const res = await fetch(`${API_BASE_URL}/api/health-card/preview`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(member),
@@ -44,7 +45,7 @@ export default function HealthCardModal({ isOpen, onClose, member }) {
   const handleDownloadPdf = async () => {
     setDownloading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/health-card/pdf', {
+      const res = await fetch(`${API_BASE_URL}/api/health-card/pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(member),

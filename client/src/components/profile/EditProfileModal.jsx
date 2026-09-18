@@ -12,6 +12,7 @@ import {
   Shield
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function EditProfileModal({ isOpen, onClose, currentUser, onProfileUpdated }) {
   const { t } = useLanguage();
@@ -81,7 +82,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser, onProfi
 
     try {
       const token = localStorage.getItem('arogya_token');
-      const res = await fetch('http://localhost:5000/api/auth/profile', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -19,6 +19,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { API_BASE_URL } from '../../config/api';
 
 export default function PrescriptionResultModal({
   isOpen,
@@ -56,7 +57,7 @@ export default function PrescriptionResultModal({
     const patVillage = selectedMember?.village || prescription.patientDetails?.village || '';
 
     try {
-      const res = await fetch('http://localhost:5000/api/appointments', {
+      const res = await fetch(`${API_BASE_URL}/api/appointments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -476,7 +477,7 @@ export default function PrescriptionResultModal({
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <a
               id="modal-download-rx-pdf-btn"
-              href={`http://localhost:5000/api/prescriptions/${prescId}/pdf`}
+              href={`${API_BASE_URL}/api/prescriptions/${prescId}/pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto btn-medical-blue text-xs py-2.5 px-5 flex items-center justify-center gap-2 shadow-md"
