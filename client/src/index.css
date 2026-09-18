@@ -1,0 +1,387 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Manrope:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-clinical-white: #F4FBF9;
+  --color-medical-blue: #0D7E73;
+  --color-medical-blue-hover: #0A665D;
+  --color-medical-blue-light: #E6F7F5;
+  --color-soft-cyan: #14B8A6;
+  --color-soft-cyan-hover: #0D9488;
+  --color-soft-cyan-light: #CCFBF1;
+  --color-health-green: #059669;
+  --color-health-green-light: #D1FAE5;
+  --color-alert-red: #E11D48;
+  --color-alert-red-hover: #BE123C;
+  --color-alert-red-light: #FFE4E6;
+  --color-caution-amber: #D97706;
+  --color-caution-amber-light: #FEF3C7;
+  --color-deep-navy: #082F35;
+  --color-deep-navy-dark: #031417;
+  --color-deep-navy-light: #114B53;
+
+  /* Aliased theme variables */
+  --color-terracotta: #0D7E73;
+  --color-terracotta-hover: #0A665D;
+  --color-terracotta-light: #E6F7F5;
+  --color-deep-teal: #082F35;
+  --color-deep-teal-dark: #031417;
+  --color-deep-teal-light: #114B53;
+  --color-sky-mist: #F4FBF9;
+  --color-sun-gold: #D97706;
+  --color-sun-gold-light: #FEF3C7;
+  --color-leaf-green: #059669;
+  --color-leaf-green-light: #D1FAE5;
+  --color-alert-crimson: #E11D48;
+  --color-alert-crimson-hover: #BE123C;
+  --color-alert-crimson-light: #FFE4E6;
+
+  --color-dark-base: #031417;
+  --color-dark-card: #072227;
+  --color-dark-border: #103B42;
+  --color-dark-text: #F0FDFA;
+  --color-dark-muted: #85B5BC;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Manrope", "Poppins", sans-serif;
+
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+}
+
+:root {
+  --clinical-white: #F4FBF9;   /* base clinical background */
+  --medical-blue: #0D7E73;     /* primary — deep clinical teal */
+  --soft-cyan: #14B8A6;        /* secondary accent — luminous sage cyan */
+  --health-green: #059669;     /* success, healthy states — emerald */
+  --alert-red: #E11D48;        /* critical triage / emergency */
+  --caution-amber: #D97706;    /* moderate risk / caution */
+  --deep-navy: #082F35;        /* deep oceanic pine text & headers */
+
+  /* Aliased root variables */
+  --sky-mist: #F4FBF9;
+  --terracotta: #0D7E73;
+  --deep-teal: #082F35;
+  --sun-gold: #D97706;
+  --alert-crimson: #E11D48;
+  --leaf-green: #059669;
+
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 10px 32px -4px rgba(8, 47, 53, 0.08), 0 4px 16px -2px rgba(13, 126, 115, 0.05);
+
+  /* Explicit Vitals Tokens - Light Mode */
+  --vitals-card-bg: rgba(255, 255, 255, 0.90);
+  --vitals-card-border: rgba(13, 126, 115, 0.18);
+  --vitals-card-border-hover: rgba(13, 126, 115, 0.50);
+  --vitals-card-shadow: 0 10px 30px -4px rgba(8, 47, 53, 0.08), 0 4px 14px -2px rgba(13, 126, 115, 0.05);
+  
+  --vitals-label: #082F35;
+  --vitals-val: #082F35;
+  --vitals-unit: #4B6368;
+  --vitals-zero: #94A3B8;
+  
+  --vitals-badge-idle-bg: rgba(8, 47, 53, 0.08);
+  --vitals-badge-idle-text: #082F35;
+  --vitals-badge-idle-border: rgba(8, 47, 53, 0.15);
+  
+  --vitals-icon-bg: rgba(13, 126, 115, 0.12);
+  --vitals-icon-color: #0D7E73;
+  
+  --vitals-divider: rgba(8, 47, 53, 0.10);
+  
+  --vitals-badge-normal-bg: rgba(5, 150, 105, 0.15);
+  --vitals-badge-normal-text: #065F46;
+  --vitals-badge-normal-border: rgba(5, 150, 105, 0.30);
+  
+  --vitals-badge-alert-bg: rgba(225, 29, 72, 0.15);
+  --vitals-badge-alert-text: #E11D48;
+  --vitals-badge-alert-border: rgba(225, 29, 72, 0.30);
+
+  --vitals-badge-caution-bg: rgba(217, 119, 6, 0.20);
+  --vitals-badge-caution-text: #92400E;
+  --vitals-badge-caution-border: rgba(217, 119, 6, 0.35);
+}
+
+html.dark, [data-theme="dark"] {
+  --clinical-white: #031417;
+  --deep-navy: #0F3A41;
+  --medical-blue: #14B8A6;
+  --sky-mist: #031417;
+  --deep-teal: #0F3A41;
+  --terracotta: #14B8A6;
+
+  --glass-bg: rgba(7, 34, 39, 0.88);
+  --glass-border: rgba(240, 253, 250, 0.10);
+  --glass-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+
+  --vitals-card-bg: rgba(7, 34, 39, 0.92);
+  --vitals-card-border: rgba(20, 184, 166, 0.25);
+  --vitals-card-border-hover: rgba(20, 184, 166, 0.60);
+  --vitals-card-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 4px 16px rgba(20, 184, 166, 0.08);
+  
+  --vitals-label: #CCFBF1;
+  --vitals-val: #FFFFFF;
+  --vitals-unit: #99F6E4;
+  --vitals-zero: #5EEAD4;
+  
+  --vitals-badge-idle-bg: rgba(20, 184, 166, 0.18);
+  --vitals-badge-idle-text: #E0F2FE;
+  --vitals-badge-idle-border: rgba(20, 184, 166, 0.35);
+  
+  --vitals-icon-bg: rgba(20, 184, 166, 0.22);
+  --vitals-icon-color: #5EEAD4;
+  
+  --vitals-divider: rgba(240, 253, 250, 0.12);
+  
+  --vitals-badge-normal-bg: rgba(5, 150, 105, 0.25);
+  --vitals-badge-normal-text: #4ADE80;
+  --vitals-badge-normal-border: rgba(74, 222, 128, 0.40);
+  
+  --vitals-badge-alert-bg: rgba(214, 69, 69, 0.25);
+  --vitals-badge-alert-text: #F87171;
+  --vitals-badge-alert-border: rgba(248, 113, 113, 0.45);
+
+  --vitals-badge-caution-bg: rgba(232, 169, 58, 0.25);
+  --vitals-badge-caution-text: #FCD34D;
+  --vitals-badge-caution-border: rgba(252, 211, 77, 0.40);
+}
+
+/* Global Base Typography and Crisp Clinical Gradient Canvas */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Manrope', 'Poppins', system-ui, -apple-system, sans-serif;
+  color: #082F35;
+  background: linear-gradient(135deg, #F4FBF9 0%, #E7F6F3 40%, #EFF9F6 75%, #F8FCFB 100%) !important;
+  background-attachment: fixed !important;
+  overflow-x: hidden;
+}
+
+html.dark, html.dark body, [data-theme="dark"], [data-theme="dark"] body {
+  background: linear-gradient(135deg, #020C0E 0%, #031417 50%, #072227 100%) !important;
+  color: #F0FDFA !important;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+/* Master Glassmorphism Card Utility */
+.glass-card, .neo-glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem; /* rounded-3xl */
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover, .neo-glass-card:hover {
+  box-shadow: 0 16px 44px -4px rgba(8, 47, 53, 0.14), 0 6px 20px -2px rgba(13, 126, 115, 0.12);
+  border-color: rgba(13, 126, 115, 0.35);
+  transform: translateY(-2px);
+}
+
+.dark .glass-card:hover, .dark .neo-glass-card:hover {
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.65);
+  border-color: rgba(20, 184, 166, 0.45);
+}
+
+/* Vitals Card Specific Tokens & Utilities (High Contrast Light & Dark) */
+.vitals-meter-card {
+  background: var(--vitals-card-bg) !important;
+  border: 1px solid var(--vitals-card-border) !important;
+  box-shadow: var(--vitals-card-shadow) !important;
+}
+
+.vitals-meter-card:hover {
+  border-color: var(--vitals-card-border-hover) !important;
+}
+
+.vitals-label {
+  color: var(--vitals-label) !important;
+}
+
+.vitals-val {
+  color: var(--vitals-val) !important;
+}
+
+.vitals-zero {
+  color: var(--vitals-zero) !important;
+}
+
+.vitals-unit {
+  color: var(--vitals-unit) !important;
+}
+
+.vitals-divider {
+  border-top: 1px solid var(--vitals-divider) !important;
+}
+
+.vitals-badge-idle {
+  background: var(--vitals-badge-idle-bg) !important;
+  color: var(--vitals-badge-idle-text) !important;
+  border: 1px solid var(--vitals-badge-idle-border) !important;
+}
+
+.vitals-badge-normal {
+  background: var(--vitals-badge-normal-bg) !important;
+  color: var(--vitals-badge-normal-text) !important;
+  border: 1px solid var(--vitals-badge-normal-border) !important;
+}
+
+.vitals-badge-alert {
+  background: var(--vitals-badge-alert-bg) !important;
+  color: var(--vitals-badge-alert-text) !important;
+  border: 1px solid var(--vitals-badge-alert-border) !important;
+}
+
+.vitals-badge-caution {
+  background: var(--vitals-badge-caution-bg) !important;
+  color: var(--vitals-badge-caution-text) !important;
+  border: 1px solid var(--vitals-badge-caution-border) !important;
+}
+
+.vitals-icon-idle {
+  background: var(--vitals-icon-bg) !important;
+  color: var(--vitals-icon-color) !important;
+}
+
+/* Primary Clinical Teal & Emerald CTA Button */
+.btn-medical, .btn-medical-blue, .btn-terracotta {
+  background: linear-gradient(135deg, #0D7E73 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px -2px rgba(13, 126, 115, 0.45);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-medical:hover, .btn-medical-blue:hover, .btn-terracotta:hover {
+  background: linear-gradient(135deg, #0A665D 0%, #047857 100%) !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -2px rgba(13, 126, 115, 0.60);
+}
+
+.btn-medical:active, .btn-medical-blue:active, .btn-terracotta:active {
+  transform: translateY(0);
+}
+
+/* Secondary Action Button (Deep Oceanic Pine) */
+.btn-teal, .btn-navy {
+  background: linear-gradient(135deg, #082F35 0%, #0D5C63 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 18px -2px rgba(8, 47, 53, 0.35);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-teal:hover, .btn-navy:hover {
+  background: linear-gradient(135deg, #051F23 0%, #0A474D 100%) !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -2px rgba(8, 47, 53, 0.45);
+}
+
+.dark .btn-teal, .dark .btn-navy {
+  background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%) !important;
+  color: #031417 !important;
+  box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.4);
+}
+
+.dark .btn-teal:hover, .dark .btn-navy:hover {
+  background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 100%) !important;
+}
+
+/* Luminous Sage Cyan Action Button */
+.btn-cyan {
+  background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.35);
+}
+
+.btn-cyan:hover {
+  background: linear-gradient(135deg, #0D9488 0%, #0A665D 100%) !important;
+  transform: translateY(-1px);
+}
+
+/* Glass Outline Button */
+.btn-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  color: #082F35;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dark .btn-glass {
+  color: #F0FDFA;
+}
+
+.btn-glass:hover {
+  border-color: #0D7E73;
+  color: #0D7E73;
+  transform: translateY(-1px);
+}
+
+.dark .btn-glass:hover {
+  border-color: #14B8A6;
+  color: #14B8A6;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(11, 42, 74, 0.2);
+  border-radius: 10px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(244, 249, 251, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(11, 42, 74, 0.4);
+}
