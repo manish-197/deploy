@@ -357,11 +357,18 @@ export default function HeartDigitalTwin({ heartRate = 0 }) {
 
     // 12. Animation Loop: Real-Time Physiological Cardiac Rhythm
     let animationFrameId;
-    const clock = new THREE.Clock();
+    const timer = typeof THREE.Timer !== 'undefined' ? new THREE.Timer() : null;
+    const startTime = performance.now();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
+      let time;
+      if (timer) {
+        timer.update();
+        time = timer.getElapsed();
+      } else {
+        time = (performance.now() - startTime) * 0.001;
+      }
 
       // Ambient rotation and inertia decay
       if (!isDragging) {
@@ -436,6 +443,9 @@ export default function HeartDigitalTwin({ heartRate = 0 }) {
       coronaryMaterial.dispose();
       particleMat.dispose();
       bumpTexture.dispose();
+      if (timer && typeof timer.dispose === 'function') {
+        timer.dispose();
+      }
     };
   }, [heartRate]);
 

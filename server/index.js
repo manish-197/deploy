@@ -26,20 +26,40 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Extract client connection URLs from environment variables (e.g. Render Dashboard)
+const envOrigins = [
+  process.env.CLIENT_URL,
+  process.env.FRONTEND_URL,
+  ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
+]
+  .filter(Boolean)
+  .map(url => url.trim().replace(/\/+$/, ''));
+
 const allowedOrigins = [
   'https://arogyarakshak-ai.netlify.app',
   'http://localhost:5173',
   'http://localhost:5000',
-  'http://localhost:3000'
+  'http://localhost:3000',
+  ...envOrigins
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.netlify.app')) {
-      callback(null, true);
-    } else {
-      callback(null, true);
+    // Allow server-to-server, mobile app, and same-origin requests without Origin header
+    if (!origin) return callback(null, true);
+
+    const cleanOrigin = origin.replace(/\/+$/, '');
+    const isAllowed =
+      allowedOrigins.includes(cleanOrigin) ||
+      cleanOrigin.endsWith('.netlify.app') ||
+      cleanOrigin.includes('localhost') ||
+      cleanOrigin.includes('127.0.0.1');
+
+    if (isAllowed) {
+      return callback(null, true);
     }
+    // Allow all configured domains or fallback
+    return callback(null, true);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],

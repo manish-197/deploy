@@ -298,7 +298,8 @@ export async function generatePrescriptionPdf(req, res) {
     }
 
     // Verification URL encoded into QR Code
-    const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
+    const rawBaseUrl = process.env.BACKEND_URL || process.env.RENDER_EXTERNAL_URL || process.env.BASE_URL || 'http://localhost:5000';
+    const baseUrl = rawBaseUrl.trim().replace(/\/+$/, '');
     const verifyUrl = `${baseUrl}/api/prescriptions/verify/${id}`;
     const qrImageBase64 = await QRCode.toDataURL(verifyUrl, { margin: 1, width: 120 });
     const qrBuffer = Buffer.from(qrImageBase64.split(',')[1], 'base64');
